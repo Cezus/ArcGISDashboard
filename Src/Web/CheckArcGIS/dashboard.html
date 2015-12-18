@@ -1,0 +1,61 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" ng-app="arcGISDashboard">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <style>
+        .service-item {
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div ng-controller="DashboardController as vm">
+        <h1>Check ArcGIS</h1>
+        <ul>
+            <li ng-repeat="service in vm.services"><a href="#" ng-click="vm.changeService(service.url)">{{service.name}}</a></li>
+        </ul>
+        <h3 id="arcgis-server"></h3>
+
+        <div style="float: left">
+            <div style="width: 500px; float: left">
+                <h2>Layers</h2>
+                <ul id="arcgis-layers">
+                    <li class="service-item" ng-repeat="layer in vm.layers">
+                        <a href="{{layer.urls.definition}}" target="_blank">{{layer.name}}</a>
+                        <span> (aantal: {{layer.count}}, id: {{layer.id}})</span>
+                        <ul>
+                            <li>
+                                <a href="{{layer.urls.listAll}}" target="_blank">List all</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+                <button id="refresh" ng-click="vm.refreshData()">refresh</button>
+            </div>
+
+            <div style="width: 500px; float: left">
+                <h2>Tables</h2>
+                <ul id="arcgis-tables">
+                    <li class="service-item" ng-repeat="table in vm.tables">
+                        <a href="{{table.urls.definition}}" target="_blank">{{table.name}}</a>
+                        <span> (aantal: {{table.count}}, id: {{table.id}})</span>
+                        <ul>
+                            <li>
+                                <a href="{{table.urls.listAll}}" target="_blank">List all</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script src="Scripts/jquery-2.1.4.js"></script>
+    <script src="Scripts/angular.js"></script>
+    <script src="app/app.startup.js"></script>
+    <script src="app/arcgisdata.service.js"></script>
+    <script src="app/dashboard.js"></script>
+</body>
+</html>
